@@ -1,3 +1,5 @@
+import java.util.Random;
+
 public class Tree {
     Node root;
     int depth;
@@ -20,9 +22,32 @@ public class Tree {
         }
     }
 
+    /**
+     * Intialise the tree with random values of nodes.
+     */
     void initTree(){
         for(int i=0;i<nodesNumber;i++) {
+            Random random = new Random();
+            Node newNode = new Node(random.nextInt(Main.MAX_NODE));
+            insertNode(this.root, newNode);
+            System.out.println(newNode.val);
+        }
+    }
 
+    /**
+     * Search for an existing node in the tree.
+     * @param root
+     * @param query
+     * @return
+     */
+    boolean treeSearch(Node root, Node query) {
+        if(root == null || query == null) return false;
+        if(root.val == query.val) return true;
+
+        if(query.val < root.val) {
+            return treeSearch(root.left, query);
+        } else {
+            return treeSearch(root.right, query);
         }
     }
 }
