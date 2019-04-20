@@ -100,6 +100,7 @@ public class Tree {
     public Node deleteNode(Node root, Node toBeRemoved) {
         if (root == null || toBeRemoved == null) return null;
 
+        // If current root is the node we want to remove.
         if(root.val == toBeRemoved.val){
             // If node to be deleted has no child
             if(root.left == null && root.right == null) {
@@ -108,10 +109,52 @@ public class Tree {
             }
 
             // If node to be deleted has one child
-            
+            if(root.left == null) {
+                root = root.right;
+                return root;
+            }
+            if(root.right == null) {
+                root = root.left;
+                return root;
+            }
+
+            // If the node to be removed has two children
+            if(root.left != null && root.right !=null) {
+                Node smallest = findSmallestNode(root);
+                root = smallest;
+                root.right = deleteNode(root.right, smallest);
+                return root;
+            }
         }
 
+        // Traverse left or right.
+        if(root.val > toBeRemoved.val) {
+            return deleteNode(root.left, toBeRemoved);
+        } else
+        return deleteNode(root.right, toBeRemoved);
+    }
 
+    /**
+     * Find the smallest node in this given subtree.
+     * @param root The root node of the given subtree.
+     * @return The smallest node of the subtree.
+     */
+    private Node findSmallestNode(Node root) {
+        if(root == null) return null;
+        return root.left == null ? root : findSmallestNode(root.left);
+    }
+
+
+    public Node lowestCommonAncestor(Node root, Node p, Node q) {
+        if(root == null || p == null || q == null) return null;
+        if(root.val == p.val || root.val == q.val) return root;
+
+        Node left = lowestCommonAncestor(root.left, p, q);
+        Node right = lowestCommonAncestor(root.right, p, q);
+
+        if(left != null && right != null) return root;
+
+        return left == null ? right: left;
     }
 
 

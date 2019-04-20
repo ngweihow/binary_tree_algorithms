@@ -21,8 +21,10 @@ public class Main {
         tree.insertNode(tree.getRoot(), new Node(3));
         tree.insertNode(tree.getRoot(), new Node(5));
         tree.printTree();
+        tree.deleteNode(tree.getRoot(), new Node(5));
+        tree.printTree();
         System.out.println(tree.treeSearch(root, new Node(9)));
-
+        System.out.println(tree.lowestCommonAncestor(tree.getRoot(), new Node(3), new Node(8)).val);
 
     }
 }
