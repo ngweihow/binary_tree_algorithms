@@ -26,5 +26,9 @@ public class Main {
         System.out.println(tree.treeSearch(root, new Node(9)));
         System.out.println(tree.lowestCommonAncestor(tree.getRoot(), new Node(3), new Node(8)).val);
 
+
+        // Invert Binary Tree
+        tree.invertBinaryTree(tree.getRoot());
+        tree.printTree();
     }
 }

@@ -1,4 +1,5 @@
 import java.util.Random;
+import java.util.Stack;
 
 public class Tree {
     private Node root = null;
@@ -144,7 +145,14 @@ public class Tree {
         return root.left == null ? root : findSmallestNode(root.left);
     }
 
-
+    /**
+     * Lowest Common Ancestor to find first similar ancestor of two given nodes.
+     * This includes the query nodes themselves.
+     * @param root Current root node.
+     * @param p Node 1 to find the ancestor of.
+     * @param q Node 2 to find the ancestor of.
+     * @return The lowest common ancestor.
+     */
     public Node lowestCommonAncestor(Node root, Node p, Node q) {
         if(root == null || p == null || q == null) return null;
         if(root.val == p.val || root.val == q.val) return root;
@@ -155,6 +163,28 @@ public class Tree {
         if(left != null && right != null) return root;
 
         return left == null ? right: left;
+    }
+
+    public Node invertBinaryTree(Node root) {
+        if(root == null) return null;
+
+        Node oldRight = invertBinaryTree(root.right);
+        Node oldLeft = invertBinaryTree(root.left);
+
+        root.left = oldRight;
+        root.right = oldLeft;
+
+        return root;
+    }
+
+
+    public boolean depthFirstSearch(Node root, Node query) {
+
+
+
+
+
+        return false;
     }
 
 
